@@ -13,10 +13,11 @@ export default class RandomChar extends Component {
         loading: true,
         error: false
     }
+    
     //
     componentDidMount() {
         this.updateChar();
-        this.timerId = setInterval(this.updateChar, 1500);        
+        this.timerId = setInterval(this.updateChar, this.props.interval);        
     }
     //
     componentWillUnmount() {
@@ -62,6 +63,19 @@ export default class RandomChar extends Component {
                 {content}
             </div>
         );
+    }
+}
+
+RandomChar.defaultProps = {
+    interval: 15000
+}    
+RandomChar.propTypes = {
+    interval: (props, propName, componentName) => {
+        const value = props[propName];
+        if (typeof value === 'number' && !isNaN(value)) {
+            return null;
+        }
+        return new TypeError(`${componentName} : ${propName} must be a number`)
     }
 }
 
