@@ -10,19 +10,19 @@ export default class CharacterPage extends Component {
     
     gotService = new gotService();
     state = {
-        selectedChar: 130,
+        selectedChar: null,
         error: false
-    }
-    //
-    componentDidCatch() {
-        this.setState({
-            error: true
-        })
     }
     //
     onItemSelected = (id) => {
         this.setState({
             selectedChar: id
+        })
+    }
+    //
+    componentDidCatch() {
+        this.setState({
+            error: true
         })
     }
     //
@@ -36,11 +36,13 @@ export default class CharacterPage extends Component {
                         onItemSelected={this.onItemSelected}
                         getData={this.gotService.getAllCharacters}
                         renderItem={({name, gender}) => `${name} (${gender})`}
-                    />
+            />
         )
 
-        const charDetails = (
-            <ItemDetails charId={this.state.selectedChar}>
+        const itemDetails = (
+            <ItemDetails 
+                itemId={this.state.selectedChar}
+                getData={this.gotService.getCharacter} >
                 <Field field='gender' label='Gender'/>
                 <Field field='born' label='Born'/>
                 <Field field='died' label='Died'/>
@@ -51,7 +53,7 @@ export default class CharacterPage extends Component {
         return (
             <RowBlock
                 left={itemList}
-                right={charDetails}
+                right={itemDetails}
             />
          )   
     }

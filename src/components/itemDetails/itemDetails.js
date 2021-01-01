@@ -8,9 +8,9 @@ const Field = ({item, field, label}) => {
             <span>{item[field]}</span>
         </li>        
     )
-}
+};
 
-export {Field}
+export {Field};
 
 export default class ItemDetails extends Component {
 
