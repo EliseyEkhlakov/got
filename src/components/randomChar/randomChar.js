@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import gotService from '../../services/gotService';
 import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
+import PropTypes from 'prop-types';
 
 import './randomChar.css';
 
@@ -70,13 +71,7 @@ RandomChar.defaultProps = {
     interval: 15000
 }    
 RandomChar.propTypes = {
-    interval: (props, propName, componentName) => {
-        const value = props[propName];
-        if (typeof value === 'number' && !isNaN(value)) {
-            return null;
-        }
-        return new TypeError(`${componentName} : ${propName} must be a number`)
-    }
+    interval: PropTypes.number
 }
 
 const View = ({char}) => {
